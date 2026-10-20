@@ -89,12 +89,12 @@ if (PIXEL_ID !== 'SEU_PIXEL_ID') { fbq('init', PIXEL_ID); fbq('track', 'PageView
 
 <header class="wrap">
   <div class="kicker">Aula gratuita · Igor, Sevet Company</div>
-  <h1>E se você perdesse o emprego <em>amanhã</em>?</h1>
-  <p class="sub">Assista até o final: eu te mostro como uma loja online com 5 pessoas fatura mais de R$ 200 mil por mês, e como montar a sua do zero, sem largar o que você já tem.</p>
+  <h1>A IA que faz o trabalho de uma <em>agência inteira</em> na minha loja</h1>
+  <p class="sub">Assista até o final: eu te mostro, na tela, como opero uma loja de óculos com 5 pessoas, sem agência de tráfego, sem designer e sem copywriter, e como você pode fazer o mesmo na sua.</p>
 </header>
 
 <main class="wrap">
-  <!-- ===== PLAYER VTURB: VSL "vsl cortado.mov" (conta HS). Para trocar o vídeo, troque só este bloco. ===== -->
+  <!-- ===== PLAYER VTURB (conta HS). Para trocar o vídeo, troque só este bloco. ===== -->
   <div class="player" id="vsl">
     <vturb-smartplayer id="vid-6ad64bf18c090956838eab23" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>
     <script type="text/javascript">var s=document.createElement("script"); s.src="https://scripts.converteai.net/8613ae52-f6c8-44a0-9cd1-201746d9a33e/players/6ad64bf18c090956838eab23/v4/player.js", s.async=!0, document.head.appendChild(s);</script>
@@ -141,9 +141,8 @@ if (PIXEL_ID !== 'SEU_PIXEL_ID') { fbq('init', PIXEL_ID); fbq('track', 'PageView
 
     <section>
       <h2>Perguntas que sempre chegam</h2>
-      <details><summary>Preciso largar meu emprego?</summary><p>Não. O método foi pensado para quem quer montar a loja do lado, nos fins de semana, sem largar o que já tem.</p></details>
+      <details><summary>Preciso contratar agência, designer ou copywriter?</summary><p>Não. A proposta do método é a IA fazer esse trabalho: anúncios, textos e página, com os prompts que eu uso na minha loja.</p></details>
       <details><summary>Nunca vendi nada na internet. Serve pra mim?</summary><p>Serve. O curso começa do zero: escolher o produto, montar a loja e fazer o primeiro anúncio.</p></details>
-      <details><summary>Quanto eu preciso investir para começar?</summary><p>[CONFIRMAR com o Igor: custo da Shopify, do produto e o orçamento diário mínimo de anúncio que ele recomenda.]</p></details>
       <details><summary>É sobre Shopee ou Mercado Livre?</summary><p>Não. É loja própria (DTC): o cliente é seu, a margem é sua e nenhuma plataforma decide quanto você aparece.</p></details>
       <details><summary>Como eu recebo o acesso?</summary><p>As instruções de acesso chegam no e-mail que você usar na compra.</p></details>
       <a class="cta" id="btn-3" href="#" data-checkout>Garantir minha vaga</a>
@@ -176,9 +175,9 @@ if (PIXEL_ID !== 'SEU_PIXEL_ID') { fbq('init', PIXEL_ID); fbq('track', 'PageView
     });
   })();
 
-  // Mostra o que tem .esconder no minuto do pitch (preço em ~17:06 na VSL atual).
+  // Mostra o que tem .esconder no minuto do pitch (preço em 9:55 na VSL de 11 min).
   // Ajustar PITCH_SEGUNDOS se a VSL for reeditada.
-  var PITCH_SEGUNDOS = 1020;
+  var PITCH_SEGUNDOS = 595; // VSL editada de 11 min: preço em 9:55
   (function esperaPlayer(tentativas) {
     var player = document.querySelector('vturb-smartplayer');
     if (player) {
