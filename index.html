@@ -103,7 +103,7 @@ if (PIXEL_ID !== 'SEU_PIXEL_ID') { fbq('init', PIXEL_ID); fbq('track', 'PageView
 
   <!-- ===== A PARTIR DAQUI, SÓ APARECE NO PITCH ===== -->
   <div class="esconder">
-    <a class="cta" id="btn-1" href="#" data-checkout>Quero entrar na Máquina DTC<small>R$ 297 à vista ou 12x de R$ 30,71</small></a>
+    <!-- O botão principal fica DENTRO do vídeo (Botão de Ação da Vturb, 9:55), como o Matheus Lourenço recomenda no #157. -->
     <p class="seguro">Pagamento seguro pela Ticto · Garantia de 7 dias</p>
 
     <section>
@@ -167,12 +167,26 @@ if (PIXEL_ID !== 'SEU_PIXEL_ID') { fbq('init', PIXEL_ID); fbq('track', 'PageView
     ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src', 'sck', 'fbclid'].forEach(function (k) {
       if (params.get(k)) url.searchParams.set(k, params.get(k));
     });
+    function inicioCheckout() {
+      if (window.fbq && PIXEL_ID !== 'SEU_PIXEL_ID') fbq('track', 'InitiateCheckout', {value: 297, currency: 'BRL'});
+    }
     document.querySelectorAll('[data-checkout]').forEach(function (a) {
       a.href = url.toString();
-      a.addEventListener('click', function () {
-        if (window.fbq && PIXEL_ID !== 'SEU_PIXEL_ID') fbq('track', 'InitiateCheckout', {value: 297, currency: 'BRL'});
-      });
+      a.addEventListener('click', inicioCheckout);
     });
+    // Botão de Ação da Vturb (dentro do vídeo): soma as UTMs ao link e dispara o InitiateCheckout.
+    document.addEventListener('click', function (e) {
+      var path = e.composedPath ? e.composedPath() : [];
+      for (var i = 0; i < path.length; i++) {
+        var el = path[i];
+        if (el && el.tagName === 'A' && el.href && el.href.indexOf('payment.ticto.app') !== -1 && !el.hasAttribute('data-checkout')) {
+          e.preventDefault();
+          inicioCheckout();
+          setTimeout(function () { location.href = url.toString(); }, 150);
+          return;
+        }
+      }
+    }, true);
   })();
 
   // Mostra o que tem .esconder no minuto do pitch (preço em 9:55 na VSL de 11 min).
