@@ -159,12 +159,12 @@ if (PIXEL_ID !== 'SEU_PIXEL_ID') { fbq('init', PIXEL_ID); fbq('track', 'PageView
   // ===== LINK DO CHECKOUT TICTO: colar aqui (demanda 3) =====
   var CHECKOUT_URL = 'https://payment.ticto.app/OC0CB4C92';
 
-  // Repassa as UTMs (e src/sck) da página para o checkout.
+  // Repassa as UTMs (e src) da página para o checkout. O sck fica para a Vturb (chave v3_ do rastreamento de conversões).
   (function () {
     var params = new URLSearchParams(location.search);
     var url;
     try { url = new URL(CHECKOUT_URL); } catch (e) { return; }
-    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src', 'sck', 'fbclid'].forEach(function (k) {
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src', 'fbclid'].forEach(function (k) {
       if (params.get(k)) url.searchParams.set(k, params.get(k));
     });
     function inicioCheckout() {
@@ -181,12 +181,16 @@ if (PIXEL_ID !== 'SEU_PIXEL_ID') { fbq('init', PIXEL_ID); fbq('track', 'PageView
         var el = path[i];
         if (el && el.tagName === 'A' && el.href && el.href.indexOf('payment.ticto.app') !== -1 && !el.hasAttribute('data-checkout')) {
           e.preventDefault();
-          var destino = new URL(el.href);
-          ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src', 'sck', 'fbclid'].forEach(function (k) {
-            if (params.get(k)) destino.searchParams.set(k, params.get(k));
-          });
+          var link = el;
           inicioCheckout();
-          setTimeout(function () { location.href = destino.toString(); }, 150);
+          // Lê o link só na saída, para pegar o sck que a Vturb injeta no clique.
+          setTimeout(function () {
+            var destino = new URL(link.href);
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src', 'fbclid'].forEach(function (k) {
+              if (params.get(k)) destino.searchParams.set(k, params.get(k));
+            });
+            location.href = destino.toString();
+          }, 150);
           return;
         }
       }
