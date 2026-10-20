@@ -174,15 +174,19 @@ if (PIXEL_ID !== 'SEU_PIXEL_ID') { fbq('init', PIXEL_ID); fbq('track', 'PageView
       a.href = url.toString();
       a.addEventListener('click', inicioCheckout);
     });
-    // Botão de Ação da Vturb (dentro do vídeo): soma as UTMs ao link e dispara o InitiateCheckout.
+    // Botões de Ação da Vturb (dentro do vídeo: R$ 297 aos 9:55 e 20% OFF aos 10:40): mantém o link do botão, soma as UTMs e dispara o InitiateCheckout.
     document.addEventListener('click', function (e) {
       var path = e.composedPath ? e.composedPath() : [];
       for (var i = 0; i < path.length; i++) {
         var el = path[i];
         if (el && el.tagName === 'A' && el.href && el.href.indexOf('payment.ticto.app') !== -1 && !el.hasAttribute('data-checkout')) {
           e.preventDefault();
+          var destino = new URL(el.href);
+          ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src', 'sck', 'fbclid'].forEach(function (k) {
+            if (params.get(k)) destino.searchParams.set(k, params.get(k));
+          });
           inicioCheckout();
-          setTimeout(function () { location.href = url.toString(); }, 150);
+          setTimeout(function () { location.href = destino.toString(); }, 150);
           return;
         }
       }
