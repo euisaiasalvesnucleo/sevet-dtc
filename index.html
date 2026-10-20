@@ -39,6 +39,7 @@ if (PIXEL_ID !== 'SEU_PIXEL_ID') { fbq('init', PIXEL_ID); fbq('track', 'PageView
 
   .tarja { background: #e5484d; color: #fff; text-align: center; padding: 12px 16px; font: 800 clamp(12px, 3.7vw, 20px)/1.3 Archivo, sans-serif; text-transform: uppercase; letter-spacing: 0; white-space: nowrap; }
   .tarja s { opacity: .85; }
+  @media (max-width: 359px) { .tarja { white-space: normal; } }
   .tarja b { color: #ffe14d; }
   header { padding: 22px 0 6px; text-align: center; }
   .kicker { font: 600 12px/1.2 Inter; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
